@@ -1,7 +1,5 @@
 let ad = App.loadSpritesheet("700.png");
 let button = App.loadSpritesheet("fixed.png");
-let _widget = null;
-var response;
 
 App.onJoinPlayer.Add(function(){
     App.httpGet(
@@ -18,12 +16,10 @@ App.onJoinPlayer.Add(function(){
             App.sayToAll(`ad_len: ${response.ad_len}`, 0xffffff);
             App.sayToAll(`ad_num: ${response.ad_num}`, 0xffffff);
             App.sayToAll(`img: ${response.image}`, 0xffffff);
-        }
-    );
+        });
 
     Map.putObject(10, 10, ad, {overlap : true});
     Map.putObject(10, 14, button, {overlap : true});
-
 });
 
 App.addOnTileTouched(10, 10, function (player) {
@@ -31,21 +27,8 @@ App.addOnTileTouched(10, 10, function (player) {
 });
 
 App.addOnTileTouched(10, 14, function (player) {
-    _widget = player.showWidget("widget.html","top",300,300);
-	
-});
-
-// --------------------------------------------------------- //
-
-// 플레이어가 입장할 때 동작하는 함수
-App.onJoinPlayer.Add(function (player) {
-	player.tag = {
-		widget: null,
-	};
-
-	player.tag.widget = player.showWidget("widget.html", "top", 600, 500);
+    player.tag.widget = player.showWidget("ad.html", "top", 600, 300);
 	player.tag.widget.onMessage.Add(function (player, msg) {
-		// 위젯에서 App으로 'type: close'라는 메시지를 보내면 위젯을 파괴함
 		if (msg.type == "close") {
 			player.showCenterLabel("위젯이 닫혔습니다.");
 			player.tag.widget.destroy();
@@ -53,5 +36,4 @@ App.onJoinPlayer.Add(function (player) {
 		}
 	});
 });
-
 

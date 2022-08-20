@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            body {
+                background-color: beige;
+            }
+        </style>
+    </head>
+    <body>
+        hjkgfdfgh[poiiuoytredfvbgnjmkolpoiuyt1
+        <div class="button_close">
+            <i onclick="closeWidget()" class="fa-solid fa-xmark"></i>
+        </div>
+    </body>
+    <script type="text/javascript">
+                // x 버튼을 누르면 호출되는 함수
+                function closeWidget() {
+                    // App으로 메시지를 보냄.
+                    window.parent.postMessage(
+                        {
+                            type: "close",
+                        },
+                        "*"
+                    );
+                }
+    </script>
+</html>
