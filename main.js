@@ -1,7 +1,6 @@
 let ad = App.loadSpritesheet("hellozep.png");
 let button = App.loadSpritesheet("fixed.png");
 
-
 App.onJoinPlayer.Add(function(player){
     Map.putObject(10, 10, ad, {overlap : true});
     Map.putObject(10, 14, button, {overlap : true});
@@ -24,17 +23,22 @@ App.onJoinPlayer.Add(function(player){
 });
 
 App.addOnTileTouched(10, 10, function (player) {
-    player.spawnAtMap("65jeBA", "2YvXMJ"); //-- spacehash first, maphash second --//
+    player.spawnAtMap(response.SpaceHashID, response.MapHashID); //-- spacehash first, maphash second --//
 });
 
 
 App.addOnTileTouched(10, 14, function (player) {
     player.tag.widget = player.showWidget("ad.html", "top", 600, 300);
 	player.tag.widget.onMessage.Add(function (player, msg) {
-		if (msg.type == "close") {
-			player.tag.widget.destroy();
+        if (msg.type == "close") {
+            player.tag.widget.destroy();
 			player.tag.widget = null;
 		}
 	});
+    player.tag.widget.sendMessage({
+        text: response.textMessage,
+        author: response.name,
+    });
 });
+
 
