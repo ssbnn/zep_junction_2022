@@ -1,8 +1,12 @@
 let ad = App.loadSpritesheet("hellozep.png");
+let ad2 = App.loadSpritesheet("loas.png");
+let ad3 = App.loadSpritesheet("vocla.png");
 let button = App.loadSpritesheet("fixed.png");
 
 App.onJoinPlayer.Add(function(player){
     Map.putObject(10, 10, ad, {overlap : true});
+    Map.putObject(40, 40, ad2, {overlap : true});
+    Map.putObject(50, 50, ad3, {overlap : true});
     Map.putObject(10, 14, button, {overlap : true});
     player.tag = {widget: null};
     App.httpGet(
@@ -26,6 +30,9 @@ App.addOnTileTouched(10, 10, function (player) {
     player.spawnAtMap(response.SpaceHashID, response.MapHashID); //-- spacehash first, maphash second --//
 });
 
+App.addOnTileTouched(40, 40, function (player) {
+    player.spawnAtMap(response.SpaceHashID, response.MapHashID); //-- spacehash first, maphash second --//
+});
 
 App.addOnTileTouched(10, 14, function (player) {
     player.tag.widget = player.showWidget("ad.html", "top", 600, 300);
